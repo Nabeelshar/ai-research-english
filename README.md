@@ -1,362 +1,348 @@
-# 基于编程、绘画、写作的 AI 探索与总结（18 禁） —— 2023 年 2 月版
-
-目录介绍
-
-Stable Diffusion 简易教程：[Stable Diffusion](./stable-diffusion)
-
-Jupyter 相关部分
-
-- [translate.ipynb](./translate.ipynb) 中文翻译英文
-- [codeai.ipynb](./codeai.ipynb) 代码自动生成
-
-PS：本文的图形部分因 “真实世界原因”，包含一些年龄受限的词汇，建议未成年人在监护人陪同下阅读。
-
-就当前节点（2023.02.22）而言，我虽然研究过一段时间传统的机器学习，但是并不擅长深度学习等领域，所以很多 AI 领域相关的词汇，我是不擅长的，只为自己总结一下，方便在未来更新自己的认识。
-
-内容主要是结合我过去擅长的编程、写作、绘画展开的：
-
-1. 绘画：text 2 image。结合 Stable Diffusion 讲述一张图片的演化。
-2. 写作：chat 2 article。结合 ChatGPT 讲述围绕特定主题的内容创作。
-3. 编程：comment 2 code。结合 GitHub Copilot 如何加速日常的编程活动。
-
-总体来说，**AI 相当于美国队长的实力，遇强则强，遇弱则弱**，关键其实在于 Prompt。所以，如何更好地完善 prompt，实现 prompt 工程就是：如何更好地使用 AI 的基础。
-
-> Prompt 是一种文本输入方式，用于与自然语言处理模型（例如GPT）进行交互。Prompt 是一个短语或一句话，可以启动模型并产生与 Prompt 相关的输出。这个输出可以是一个单独的单词、一句话，或者是一段完整的段落。它可以控制模型的行为，使其产生特定的结果。
-
-所以，如何更好地完善 prompt，实现 prompt 工程就是：如何更好地使用 AI 的基础。所以，在这篇文章里，我将介绍：
-
-1. 用 text 2 image 来展示如何演进 prompt
-2. 用 text 2 article 来展示充足 prompt 的优点
-3. 结合 GitHub Copliot 来实现 prompt 完成工作
-
-PS：感谢我老婆提供的照片。
-
-## 图形生成：如何描述一张照片？？
-
-人类需要思考第一个问题：如何描述一张照片？在不关心感受的情况下，我们关注于主体、背景、颜色、构图等。
-
-现在，我们脑海中出现一个场景：
-
+#AI  exploration and summary based on programming, drawing, and writing (18 bans) —— February 2023 edition
+ 
+Catalog introduction
+ 
+Stable Diffusion Simple Tutorial: [ Stable Diffusion ](./stable-diffusion)
+ 
+Jupyter related parts
+ 
+- [ translate.ipynb ](./translate.ipynb) Chinese translation to English
+- [ codeai.ipynb ](./codeai.ipynb) code is automatically generated
+ 
+PS: The graphic part of this article contains some age-restricted vocabulary due to "real-world reasons", and it is recommended that minors read it accompanied by a guardian.
+ 
+As far as the current node (2023.02.22) is concerned, although I have studied traditional machine learning for a period of time, I am not good at deep learning and other fields, so I am not good at many words related to the AI ​​​​field, so I just summarize it for myself , so that you can update your understanding in the future.
+ 
+The content is mainly based on the programming, writing, and painting that I was good at in the past:
+ 
+1. Painting: text 2 image. Combining Stable Diffusion to tell the evolution of a picture.
+2. Writing: chat 2 article. Combining ChatGPT to tell about content creation around specific topics.
+3. Programming: comment 2 code. How incorporating GitHub Copilot can speed up everyday programming activities.
+ 
+Generally speaking, **AI is equivalent to the strength of Captain America. If it is strong, it will be strong, and if it is weak, it will be weak** . The key lies in Prompt. Therefore, how to better improve the prompt and realize the prompt project is: the basis of how to better use AI.
+ 
+> Prompt is a text input method for interacting with natural language processing models such as GPT. Prompt is a phrase or sentence that starts the model and produces output related to the prompt. This output can be a single word, a sentence, or a complete paragraph. It can control the behavior of the model so that it produces specific results.
+Therefore, how to better improve the prompt and realize the prompt project is: the basis of how to better use AI. So, in this article, I will introduce:
+ 
+1. Use text 2 image to show how to evolve prompt
+2. Use text 2 article to show the advantages of sufficient prompt
+3. Combining GitHub Copliot to implement prompt to complete the work
+ 
+PS: Thanks to my wife for the photo.
+ 
+##  Graph Generation: How to describe a photo? ?
+ 
+Humans need to think about the first question: how to describe a photo? Without caring about feelings, we focus on the subject, background, color, composition, etc.
+ 
+Now, a scenario pops up in our mind:
+ 
 ![](./output/sample.jpg)
-
-接着，用文本来抽象它。在这里，我结合一下 Stable Diffusion 来讲述一下过程。
-
-### 文本描述：第一个示例
-
-生成 prompt：
-
-- phodal: 我想写一段话描述一张照片，帮我美化一下：一年轻女子穿着裙子，背对着镜头，在海边看着日落，太阳已经到地平线下面了，她的头发在风中飘动。
-- ChatGPT: 这张照片中的场景令人心醉，一位年轻女子穿着一条裙子，站在海边，背对着镜头，凝视着地平线下的夕阳。太阳已经沉入了海面，一片金黄色的光芒在海面上弥漫，照亮了整片海洋，仿佛这个时刻被定格在了时间的某个角落里。女子的头发随着微风轻轻飘动，轮廓被余晖映照得柔和而温暖。她的目光凝视着远方，仿佛在思考着生命的意义和无尽的未来。这张照片中蕴含着一种深刻的内涵，让人感受到时间和自然的力量，也让人思考着自己在这个宏大而美丽的世界中的角色和意义。 
-
-如果转换成英语的话：
-
+ 
+Next, abstract it with text. Here, I will describe the process in conjunction with Stable Diffusion.
+ 
+###  Text description: first example
+ 
+Generate prompts:
+ 
+- phodal: I want to write a paragraph describing a photo, help me beautify it: a young woman in a dress, with her back to the camera, watching the sunset by the sea, the sun is below the horizon, her hair is blowing in the wind.
+- ChatGPT: The scene in this photo is mesmerizing, a young woman wearing a dress, standing by the sea, with her back to the camera, gazing at the sunset below the horizon. The sun had sunk into the sea, and a golden light diffused across the sea, illuminating the entire ocean, as if this moment was frozen in a certain corner of time. The woman's hair fluttered gently with the breeze, and the outline was soft and warm reflected by the afterglow. Her eyes stared into the distance, as if thinking about the meaning of life and the endless future. There is a profound connotation in this photo, which makes people feel the power of time and nature, and also makes people think about their role and meaning in this grand and beautiful world.
+ 
+If converted to English:
+ 
 > A young woman wearing a flowing dress stands at the edge of the sea, her back turned to the camera as she gazes upon
 > the glow of the setting sun. The ocean stretches out before her in all its grandeur, and the sun slowly sinks below
-> the horizon, casting a golden light over the water. The woman's hair sways gently in the breeze, her features softened 
-> by the warm hues of the sunset. Her gaze is fixed on the distance, as if pondering the meaning of life and the endless 
+> the horizon, casting a golden light over the water. The woman's hair sways gently in the breeze, her features softened
+> by the warm hues of the sunset. Her gaze is fixed on the distance, as if pondering the meaning of life and the endless
 > possibilities of the future.
-
-重复了 N 次之后，你会得到你想要的成功的照片，当然也会有失败的出现（因为没有配置 negative prompt 过滤失败的情况）：
-
-![Failure](./output/failure-seeds.jpeg)
-
-但是，熟悉各种搜索引擎的关键词的或者 NLP 的你，肯定知道，上面的大部分可能是废话，可以减化为如下的词，并添加一些专用的模型词汇，如`black hair`, `hand before body`, `no hand`, `bodycon dress`：
-
+After repeating N times, you will get the successful photos you want, and of course there will be failures (because there are no negative prompts configured to filter failures):
+ 
+![ Failure ](./output/failure-seeds.jpeg)
+ 
+However, those who are familiar with the keywords of various search engines or NLP must know that most of the above may be nonsense, which can be reduced to the following words and add some special model vocabulary, such as `black hair` , ` hand before body` , `no hand` , `bodycon dress` :
+ 
 > women back view without face, flowing dress, edge of the sea, backview, back turned to the camera, upon the glow of the setting sun, sun below the horizon, golden light over the water, hair sways gently, Chinese style clothes, black hair,
-
-随后，添加一些反向 prompt，意思是不要这些内容，诸如于 AI 不擅长的：`bad hands`、`morbid` 等等。随后，不断调整 prompt，比如生成更好的 Prompt：
-
+Then, add some reverse prompts, meaning don't want these things, such as what AI is not good at: `bad hands` , `morbid` , etc. Then, constantly adjust the prompt, such as generating a better prompt:
+ 
 <table>
-  <tr>
-    <td><img src="./output/women-backview-1.jpeg" width="256px" height="384px"></td>
-    <td><img src="./output/women-backview-3.jpeg" width="256px" height="384px"></td>
-    <td><img src="./output/women-backview-4.jpeg" width="256px" height="384px"></td>
-   </tr> 
+<tr>
+<td><img src="./output/women-backview-1.jpeg" width="256px" height="384px"></td>
+<td><img src="./output/women-backview-3.jpeg" width="256px" height="384px"></td>
+<td><img src="./output/women-backview-4.jpeg" width="256px" height="384px"></td>
+</tr>
 </table>
-
-
-诸如于采用 [Magic Prompt](https://huggingface.co/spaces/Gustavosta/MagicPrompt-Stable-Diffusion)。
-
-### 精准控图：结合 ControlNet
-
-由于生成的姿势是随机的、无法控制，所以我就引入了 ControlNet 插件 ——用来实现骨骼绑定、精准控线、线稿上色、依据深度图结构透视精准重绘等。现在，就能结合我们做的创作来完善生成的图形，诸如于我们绘制草图、或者输入一张原始图片，就可以生成我们预期的效果：
-
-最后，生成的图片如下：
-
-![Openpose](output/image-with-hed.png)
-
-在我写完文章的时候，又修改了一下 prompt：
-
-> women back view without face standing on the sandy beach, bodycov full skirt, edge of the sea,  back turned to the camera, upon the glow of the setting sun, black hair, sunset red to blue gradient sky
-
-对应的 negative prompt 是：
-
-
-> (((simple background))),monochrome ,lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, lowres, bad anatomy, bad hands, text, error, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, ugly,pregnant,vore,duplicate,morbid,mut ilated,tran nsexual, hermaphrodite,long neck,mutated hands,poorly drawn hands,poorly drawn face,mutation,deformed,blurry,bad anatomy,bad proportions,malformed limbs,extra limbs,cloned face,disfigured,gross proportions, (((missing arms))),(((missing legs))), (((extra arms))),(((extra legs))),pubic hair, plump,bad legs,error legs,username,blurry,bad feet
-
-效果凑合着，还是不错的。然后，我们可以做更多的尝试，配合一下参数调整（俗称炼丹）：
-
+ 
+ 
+Such as using [ Magic Prompt ](https://huggingface.co/spaces/Gustavosta/MagicPrompt-Stable-Diffusion).
+ 
+###  Precise map control: combined with ControlNet
+ 
+Since the generated poses are random and uncontrollable, I introduced the ControlNet plug-in to achieve bone binding, precise control of lines, coloring of line drawings, accurate redrawing based on perspective of depth map structure, etc. Now, we can combine our creations to improve the generated graphics, such as drawing a sketch, or inputting an original picture, to generate our expected effect:
+ 
+Finally, the resulting image is as follows:
+ 
+![ Openpose ](output/image-with-hed.png)
+ 
+When I finished writing the article, I modified the prompt again:
+ 
+> women back view without face standing on the sandy beach, bodycov full skirt, edge of the sea, back turned to the camera, upon the glow of the setting sun, black hair, sunset red to blue gradient sky
+The corresponding negative prompt is:
+ 
+ 
+> (((simple background))),monochrome ,lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark , username, blurry, lowres, bad anatomy, bad hands, text, error, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, ugly, pregnant, vore ,duplicate,morbid,mut ilated,tran sexual,hermaphrodite,long neck,mutated hands,poorly drawn hands,poorly drawn face,mutation,deformed,blurry,bad anatomy,bad proportions,malformed limbs,extra limbs,cloned face,disfigured, gross proportions, (((missing arms))),(((missing legs))), (((extra arms))),(((extra legs))),pubic hair, plump,bad legs,error legs, username, blurry, bad feet
+The effect is improvised, which is still good. Then, we can make more attempts and adjust the parameters (commonly known as alchemy):
+ 
 <table>
-  <tr>
-    <td><img src="./output/samples/01.jpeg" width="256px" height="384px"></td>
-    <td><img src="./output/samples/02.jpeg" width="256px" height="384px"></td>
-    <td><img src="./output/samples/04.jpeg" width="256px" height="384px"></td>
-   </tr> 
-   <tr>
-    <td><img src="./output/samples/05.jpeg" width="256px" height="384px"></td>
-    <td><img src="./output/samples/06.jpeg" width="256px" height="384px"></td>
-    <td><img src="./output/samples/08.jpeg" width="256px" height="384px"></td>
-  </tr>
+<tr>
+<td><img src="./output/samples/01.jpeg" width="256px" height="384px"></td>
+<td><img src="./output/samples/02.jpeg" width="256px" height="384px"></td>
+<td><img src="./output/samples/04.jpeg" width="256px" height="384px"></td>
+</tr>
+<tr>
+<td><img src="./output/samples/05.jpeg" width="256px" height="384px"></td>
+<td><img src="./output/samples/06.jpeg" width="256px" height="384px"></td>
+<td><img src="./output/samples/08.jpeg" width="256px" height="384px"></td>
+</tr>
 </table>
-
-也可以结合 inpaint 对失真的部分进行修复。
-
-### 更多的模型集：与二次元世界的照片（18 禁）
-
-众所周知，AI 的生成质量是与模型息息相关的，所以好的质量需要有好的模型。
-
-我们可以在 [https://civitai.com/](https://civitai.com/) 上找到更多的模型，不过因为年龄限制等原因，只建议你在安全的场所打开，不建议在公共场所打开。
-
-真实的人物由于版权的种种原因，所以这个软件在二次元世界相当的流行。如下是常见的提示词来描述模型的质量，里面可能包含一些不适词语，为了体现真实世界，这里并不打算屏蔽。
-
-提示词 ：
-
+ 
+It can also be combined with inpaint to repair the distorted part.
+ 
+###  More model sets: photos with the second dimension world (18 banned)
+ 
+As we all know, the quality of AI generation is closely related to the model, so good quality requires a good model.
+ 
+We can find more models on [ https://civitai.com/](https://civitai.com/ ), but because of age restrictions and other reasons, it is only recommended that you open it in a safe place, not in public The venue is open.
+ 
+Real characters Due to various reasons of copyright, this software is quite popular in the two-dimensional world. The following are common prompt words to describe the quality of the model, which may contain some uncomfortable words. In order to reflect the real world, it is not intended to be blocked here.
+ 
+Prompt words:
+ 
 > modelshoot style, (wavy blue hair), ((half body portrait)), ((showing boobs, giant boobs, humongous breasts)), ((
 > beautiful light makeup female sorceress in majestic blue dress)), photo realistic game cg, 8k, epic, (blue diamond
 > necklace hyper intricate fine detail), symetrical features, joyful, majestic oil painting by Mikhail Vrubel, Atey
 > Ghailan, by Jeremy Mann, Greg Manchess, WLOP, Charlie Bowater, trending on ArtStation, trending on CGSociety, Intricate,
 > High Detail, Sharp focus, dramatic, photorealistic, black background, epic volumetric lighting, fine details,
 > illustration, (masterpiece, best quality, highres), standing in majestic castle
-
-负面提示词
-
+Negative prompts
+ 
 > (((simple background))),monochrome ,lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer
 > digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry,
 > lowres, bad anatomy, bad hands, text, error, extra digit, fewer digits, cropped, worst quality, low quality, normal
-> quality, jpeg artifacts, signature, watermark, username, blurry, ugly,pregnant,vore,duplicate,morbid,mut ilated,tran
+> quality, jpeg artifacts, signature, watermark, username, blurry, ugly, pregnant, vore, duplicate, morbid, mut ilated, tran
 > nsexual, hermaphrodite,long neck,mutated hands,poorly drawn hands,poorly drawn face,mutation,deformed,blurry,bad
-> anatomy,bad proportions,malformed limbs,extra limbs,cloned face,disfigured,gross proportions, (((missing arms))),(((
-> missing legs))), (((extra arms))),(((extra legs))),pubic hair, plump,bad legs,error legs,username,blurry,bad feet,
+> anatomy, bad proportions, malformed limbs, extra limbs, cloned face, disfigured, gross proportions, (((missing arms))),(((
+> missing legs))), (((extra arms))),(((extra legs))),public hair, plump,bad legs,error legs,username,blurry,bad feet,
 > lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low
 > quality, normal quality, jpeg artifacts, signature, watermark, username, blurry
-
-足够丰富的描述，可以帮助 AI 理解描述我们的需求：
-
-![Better Quality](./output/better.jpeg)
-
-上图为 AI 生成，也是同样场景下，不屏蔽的结果 —— 其原因是大部分的模型库加入了很多 18 禁的内容。
-
-### 小结
-
-现在，让我们来思考一下，如何描述一张带人物的图片：
-
-- 详细的描述词。
-- 人物的姿势。
-- 丰富的模型。
-- 反复修改的参数。
-- 持续迭代。（基于 inpaint 等进行修改）
-
-那么，文章呢？
-
-## 文章：如何围绕特定主题思考？
-
-结合一下先前 Stable Diffusion 的无数次的失败经验，我们应该先找好一个合适的框架来跑 ChatGPT。
-
-在编写内容的内容，我们会有各种思路和原则：STAR、金字塔原理、5W1H等等。
-
-我们可以以 STAR （Situation（情景）Task（任务）、Action（行动）和 Result（结果））可以作为与 ChatGPT 会话的基础：
-
-1. 描述一个情境或背景，使读者对问题有更好的了解。
-2. 说明任务或目标，告诉读者需要完成什么。
-3. 描述你所采取的行动，例如使用什么方法、工具、策略等等。
-4. 解释结果，包括遇到的挑战和取得的成果。
-
-这样，对于我们展开思路会有一些帮助。
-
-### 情境：如何用 ChatGPT 写一篇文章，以如何用 ChatGPT 写一篇文章?
-
-phodal：我想写一篇文章，主题是《如何用 ChatGPT 写一篇文章，以如何用 ChatGPT 写一篇文章 》
-
-示例：
-
+A rich enough description can help AI understand and describe our needs:
+ 
+![ Better Quality ](./output/better.jpeg)
+ 
+The picture above is generated by AI, and it is also the result of unblocking in the same scene - the reason is that most of the model libraries have added a lot of 18 forbidden content.
+ 
+###  Summary
+ 
+Now, let's think about how to describe a picture with people:
+ 
+- Detailed descriptors.
+- Pose of the character.
+- Abundant models.
+- Parameters that are repeatedly modified.
+- Continue to iterate. (modified based on inpaint, etc.)
+ 
+So, what about articles?
+ 
+##  Article: How to think around a specific topic?
+ 
+Combining the previous experience of countless failures of Stable Diffusion, we should first find a suitable framework to run ChatGPT.
+ 
+When writing content, we will have various ideas and principles: STAR, pyramid principle, 5W1H and so on.
+ 
+We can use STAR (Situation (situation) Task (task), Action (action) and Result (result)) as the basis for conversation with ChatGPT:
+ 
+1. Describe a situation or background that gives the reader a better understanding of the problem.
+2. State the task or goal and tell the reader what needs to be accomplished.
+3. Describe the actions you took, such as what methods, tools, strategies, etc. were used.
+4. Explain the results, including challenges encountered and results achieved.
+ 
+In this way, it will help us to expand our thinking.
+ 
+###  Situation: How to write an article with ChatGPT, How to write an article with ChatGPT?
+ 
+phodal: I want to write an article, the topic is "How to write an article with ChatGPT, how to write an article with ChatGPT"
+ 
+Example:
+ 
 ![](./output/chatgpt-writing-article.png)
-
-但是，这样的内容并非我们想要的。
-
-而在这个标题里，其实 ChatGPT 已经理解了，如何写一篇文章，换作是一个冷门的话题，他就不知道了。在此时，我们需要构建一个更丰富的上下文：
-
-![关注点驱动](images/focus-driven.png)
-
-在这时，ChatGPT 给出的步骤依旧是错的，我们需要继续纠正。所以，我们可以考虑在一开始给一个完整的上下文：
-
-### 构建更完整的上下文
-
-对于 ChatGPT 来说，我们需要明确的 prompt：：
-
+ 
+However, such content is not what we want.
+ 
+In this title, in fact, ChatGPT has already understood, how to write an article, if it is an unpopular topic, he does not know. At this point, we need to build a richer context:
+ 
+![ focus-driven ](images/focus-driven.png)
+ 
+At this time, the steps given by ChatGPT are still wrong, and we need to continue to correct them. So, we can consider giving a complete context at the beginning:
+ 
+###  Build a more complete context
+ 
+For ChatGPT, we need a clear prompt::
+ 
 ```
-
-我想写一篇文章，主题是《如何用 ChatGPT 写一篇文章，以如何用 ChatGPT 写一篇文章》，文章的大纲是：
-
-1. 先用 100 字介绍一下 ChatGPT
-2. 以 Julia 作为可以以具体的案例为例，介绍如何使用 ChatGPT 写一篇博客大赛的参赛作品。这包括如何确定主题、如何撰写开头和结尾、如何组织文章结构等等。主题是：《Julia Dataframe 在大数据分析领域的使用》，大纲中包含：用 200 字介绍一下 Julia 语言历史；介绍如何使用 DataFrames.jl，并有个代码示例；对比一下 Python Pandas、Apache Spark Dataframe；小结。
-3. 对本文的内容进行总结，并再次强调使用 ChatGPT 进行写作的好处。
-
-帮我写一篇文章？
+I want to write an article, the topic is "How to write an article with ChatGPT, how to write an article with ChatGPT", the outline of the article is:
+1. First introduce ChatGPT in 100 words
+2. Take Julia as an example to introduce how to use ChatGPT to write an entry for a blog contest. This includes how to decide on a topic, how to write an opening and closing, how to structure your essay, and more. The topic is: "Use of Julia Dataframe in the Field of Big Data Analysis", the outline includes: 200 words to introduce the history of Julia language; introduce how to use DataFrames.jl, and have a code example; compare Python Pandas and Apache Spark Dataframe; summary.
+3. Summarize the content of this article and re-emphasize the benefits of using ChatGPT for writing.
+Write an article for me?
 ```
-
-如此一来，我们提供的上下文就会更加准确，就可以看到一个范例：
-
-![Demo](images/chatgpt-article-demo.png)
-
-基于这个范例，可以思考我们的内容如何编写。
-
-### 构建框架（frameworks）
-
-ChatGPT 本身构建了一个框架，我们可以再输入一个有用的框架，以构建简单的反馈回路。于是，我开始教他 DDD，然后相互学习：
-
-![DDD Copilot](images/ddd-copilot-1.png)
-
-不过，ChatGPT 和上面的图片一样，经常丢失一些上下文。
-
-phodal: 在这个 TicketOrder 聚合里，他应该包含哪些 API ？
-
-在 TicketOrder 聚合里，可以包含以下一些 API：
-
-1. createOrder()：创建一个新的订单，可以接收顾客信息、场次信息、座位信息等参数，并返回一个唯一的订单号。
-2. cancelOrder(orderId)：取消某个订单，需要提供订单号。
-3. getOrder(orderId)：获取某个订单的详细信息，需要提供订单号。
-4. reserveSeats(showTimeId, seatIds)：在某个场次中预留座位，需要提供场次号和座位号。
-5. confirmOrder(orderId)：确认订单，此时座位被锁定并且订单状态被改为已确认。
-6. payOrder(orderId, paymentInfo)：支付订单，需要提供订单号和支付信息。
-7. refundOrder(orderId)：退票，需要提供订单号并且只能在订单状态为已确认时进行。
-8. updateOrder(orderId, updateInfo)：修改订单信息，可以更新顾客信息、场次信息、座位信息等，需要提供订单号和更新内容。
-
-基本的 API 可以满足电影院订票业务的需求，但具体实现还需要根据业务场景和需求进行细化和调整。
-
-### 其它小建议：
-
-相似的，与 Stable Diffusion 类似的是，AI 生成的内容经常出现各种问题，所以我们要注意：
-
-1. 保持自然的表达。ChatGPT 能够生成流畅的语句，但有时可能会出现奇怪或不合适的表达。在使用 ChatGPT 进行写作时，需要注意保持自然的表达方式。
-2. 适时修正错误。如果 ChatGPT 生成的内容不准确或有错误，应该及时进行修正，以保证文章的准确性和可读性。
-3. 多次修改和调整。ChatGPT 的输出结果虽然会自动进行语法纠错和编辑，但是为了保证文章质量，还是需要经过多次修改和调整，不断完善文章结构和内容。
-4. 保持简洁明了。在使用 ChatGPT 进行写作时，需要尽量保持简洁明了，避免使用过于复杂的句式和词汇，以便读者更好地理解文章内容。
-5. 注重原创性和独特性。尽管 ChatGPT 能够生成大量的文章，但是为了在博客大赛中脱颖而出，还需要注重文章的原创性和独特性，尽可能地突出自己的风格和思想。
-
-考虑到 ChatGPT 的代码并不那么准确，让我们使用 GitHub Copilot 生成更多的内容。
-
-## 代码生成：GitHub Copilot
-
-GitHub Copilot 是 GitHub 2021 年 8 月推出的一个 AI 代码生成工具，它可以根据你的代码，生成更多的代码。
-
-![Samples](images/github-copilot-1.png)
-
-所以，对于 Markdown 本身来说，它也能提供一些帮助。当然了，在这方向它没有 ChatGPT 那么强大，经常会出现一些奇怪的重复代码。
-
-但是，也并非不可用，我们可以使用它来生成一些代码片段，以便于我们进行修改。
-
-### 完整示例：DDD + ChatGPT + Copilot
-
-如结合 Chat GPT 我们可以完成代码的前置设计（当然有些不靠谱）：
-
-![ChatGPT DDD](images/chatgpt-ddd.png)
-
-复制生成的 API，写行注释告诉 Copilot：`convert to markdown table`，然后我们就有了：
-
-| API    | 描述             | HTTP方法 | URL                                           | 参数     | 返回值         |
-|--------|----------------|--------|-----------------------------------------------|--------|-------------|
-| 创建订单   | 创建一个新的订单       | POST   | /ticket-orders                                | 创建订单信息 | 订单ID        |
-| 查询订单   | 查询一个已存在的订单     | GET    | /ticket-orders/{orderId}                      | 订单ID   | 订单信息        |
-| 取消订单   | 取消一个已存在的订单     | DELETE | /ticket-orders/{orderId}                      | 订单ID   | 取消成功或失败信息   |
-| 添加座位   | 向一个已存在的订单添加座位  | POST   | /ticket-orders/{orderId}/seats                | 座位信息   | 座位添加成功或失败信息 |
-| 移除座位   | 从一个已存在的订单中移除座位 | DELETE | /ticket-orders/{orderId}/seats/{seatId}       | 座位ID   | 座位移除成功或失败信息 |
-| 查询可用座位 | 查询某个场次电影的可用座位  | GET    | /cinema-schedule/{scheduleId}/available-seats | 场次ID   | 可用座位信息      |
-                                         
-接下来，我们可以使用 Spring + Copilot 来生成一些代码片段，以便于我们进行修改：
-
-![github-copilot Sample](images/github-sample-2.png)
-
-在有足够类相关信息的情况下，诸如于，我们提供一个注释：
-
+ 
+In this way, the context we provide will be more accurate, you can see an example:
+ 
+![ Demo ](images/chatgpt-article-demo.png)
+ 
+Based on this paradigm, it is possible to think about how our content is written.
+ 
+###  Build framework (frameworks)
+ 
+ChatGPT itself builds a framework that we can then input into a useful framework to build simple feedback loops. So, I started to teach him DDD, and then learn from each other:
+ 
+![ DDD Copilot ](images/ddd-copilot-1.png)
+ 
+However, ChatGPT, like the image above, often loses some context.
+ 
+phodal: In this TicketOrder aggregation, which APIs should it contain?
+ 
+In the TicketOrder aggregation, the following APIs can be included:
+ 
+1. createOrder(): Create a new order, which can receive parameters such as customer information, event information, and seat information, and return a unique order number.
+2. cancelOrder(orderId): To cancel an order, you need to provide the order number.
+3. getOrder(orderId): To get the detailed information of an order, you need to provide the order number.
+4. reserveSeats(showTimeId, seatIds): To reserve seats in a session, you need to provide the session number and seat number.
+5. confirmOrder(orderId): Confirm the order, the seat is locked and the order status is changed to confirmed.
+6. payOrder(orderId, paymentInfo): To pay an order, you need to provide the order number and payment information.
+7. refundOrder(orderId): To refund a ticket, the order number is required and can only be done when the order status is confirmed.
+8. updateOrder(orderId, updateInfo): To modify order information, you can update customer information, event information, seat information, etc., and you need to provide the order number and update content.
+ 
+The basic API can meet the needs of movie theater booking business, but the specific implementation needs to be refined and adjusted according to business scenarios and needs.
+ 
+###  Other tips:
+ 
+Similarly, similar to Stable Diffusion, AI-generated content often has various problems, so we should pay attention to:
+ 
+1. Keep your expression natural. ChatGPT is able to generate fluent sentences, but sometimes strange or inappropriate expressions may appear. When using ChatGPT to write, you need to pay attention to maintaining a natural expression.
+2. Correct errors in a timely manner. If the content generated by ChatGPT is inaccurate or has errors, it should be corrected in time to ensure the accuracy and readability of the article.
+3. Multiple revisions and adjustments. Although the output results of ChatGPT will automatically perform grammatical error correction and editing, in order to ensure the quality of the article, it still needs to be revised and adjusted many times to continuously improve the structure and content of the article.
+4. Keep it simple and clear. When using ChatGPT to write, you need to keep it as concise as possible and avoid using overly complicated sentence patterns and vocabulary, so that readers can better understand the content of the article.
+5. Focus on originality and uniqueness. Although ChatGPT can generate a large number of articles, in order to stand out in the blog contest, it is necessary to pay attention to the originality and uniqueness of the articles, and to highlight one's own style and ideas as much as possible.
+ 
+Considering that ChatGPT's code is not that accurate, let's use GitHub Copilot to generate more content.
+ 
+##  Code Generation: GitHub Copilot
+ 
+GitHub Copilot is an AI code generation tool launched by GitHub in August 2021, which can generate more code based on your code.
+ 
+![ Samples ](images/github-copilot-1.png)
+ 
+So, for Markdown itself, it can also provide some help. Of course, it is not as powerful as ChatGPT in this direction, and there are often some strange duplicate codes.
+ 
+However, it is not unavailable, we can use it to generate some code snippets so that we can modify them.
+ 
+###  Complete example: DDD + ChatGPT + Copilot
+ 
+For example, combined with Chat GPT, we can complete the pre-design of the code (of course, some are unreliable):
+ 
+![ ChatGPT DDD ](images/chatgpt-ddd.png)
+ 
+Copy the generated API, write a line comment to tell Copilot: `convert to markdown table` , and then we have:
+ 
+| API | Description | HTTP Method | URL | Parameters | Return Value |
+|--------|----------------|--------|-------------- ----------------------------------|-------|------- ------|
+| Create order | Create a new order | POST | /ticket-orders | Create order information | Order ID |
+| Query order | Query an existing order | GET | /ticket-orders/{orderId} | order ID | order information |
+| Cancel order | Cancel an existing order | DELETE | /ticket-orders/{orderId} | Order ID | Cancellation success or failure information |
+| Add Seats | Add Seats to an Existing Order | POST | /ticket-orders/{orderId}/seats | Seat Information | Seat addition success or failure information |
+| Remove seat | Remove seat from an existing order | DELETE | /ticket-orders/{orderId}/seats/{seatId} | Seat ID | Seat removal success or failure information |
+| Query Available Seats | Query Available Seats for a Movie | GET | /cinema-schedule/{scheduleId}/available-seats | Show ID | Available Seat Information |
+ 
+Next, we can use Spring + Copilot to generate some code snippets so that we can modify them:
+ 
+![ github-copilot Sample ](images/github-sample-2.png)
+ 
+Where there is enough information about a class, such as, we provide a note:
+ 
 ```kotlin
 @PostMapping
-fun createTicketOrder(@RequestBody ticketOrder: TicketOrder): String {
-    // check the schedule is valid, the seats are available, then create the order
-
+fun  createTicketOrder (@RequestBody ticketOrder :  TicketOrder ): String {
+ // check the schedule is valid, the seats are available, then create the order
 }
 ```
-
-它生成的代码会更加准确：
-
-![GitHub sample 4](images/github-sample-4.png)
-
-而如果我们添加了对应的 Exception 的处理注释：`check the schedule is valid, the seats are available, then create the order, if the schedule is not valid, throw NotScheduleAvailableException`，代码进一步转化为：
-
+ 
+The code it generates will be more accurate:
+ 
+![ GitHub sample 4 ](images/github-sample-4.png)
+ 
+And if we add the corresponding Exception processing comment: `check the schedule is valid, the seats are available, then create the order, if the schedule is not valid, throw NotScheduleAvailableException` , the code is further transformed into:
+ 
 ```kotlin
 @PostMapping
-fun createTicketOrder(@RequestBody ticketOrder: TicketOrder): String {
-    // check the schedule is valid, the seats are available, then create the order, if the schedule is not valid, throw NotScheduleAvailableException
-    // check the schedule is valid
-    val schedule = cinemaScheduleService.getSchedule(ticketOrder.scheduleId)
-    if (schedule == null) {
-        throw NotScheduleAvailableException()
-    }
-    // check the seats are available
-    val availableSeats = cinemaScheduleService.getAvailableSeats(ticketOrder.scheduleId)
-    if (!availableSeats.containsAll(ticketOrder.seats)) {
-        throw NotSeatAvailableException()
-    }
-    // create order
-    return tickerOrderApplicationService.createOrder(ticketOrder)
+fun  createTicketOrder (@RequestBody ticketOrder :  TicketOrder ): String {
+ // check the schedule is valid, the seats are available, then create the order, if the schedule is not valid, throw NotScheduleAvailableException
+ // check the schedule is valid
+ val schedule = cinemaScheduleService.getSchedule(ticketOrder.scheduleId)
+ if (schedule ==  null ) {
+ throw  NotScheduleAvailableException ()
+}
+ // check the seats are available
+ val availableSeats = cinemaScheduleService.getAvailableSeats(ticketOrder.scheduleId)
+ if ( ! availableSeats. containsAll(ticketOrder. seats)) {
+ throw  NotSeatAvailableException ()
+}
+ // create order
+ return tickerOrderApplicationService.createOrder(ticketOrder)
 }
 ```
-
-在另外一些场景下，如果你的函数名和参数名都是英文，那么 Copilot 生成的代码也会更加准确：
-
-![GitHub sample 5](images/github-sample-5.png)
-
-而在单元测试的场景下，Copilot 更加强大和智能，它能够根据你的测试代码，生成更多的测试代码。
-
-### 其它：代码生成开源模型
-
-我也尝试了下 Saleforce
-的代码模型：[https://huggingface.co/Salesforce/codegen-6B-mono](https://huggingface.co/Salesforce/codegen-6B-mono)，但是不能在我的 MBP 上跑上来，有些遗憾。
-
-## 总结：AI 就像占卜
-
-你可能无法预期输出的是啥，总会有各种惊喜。
-
-而其实，与 AI 的 prompt 相似的是：和人类聊天的时候，我们也需要提供足够的上下文。所以，你需要一下 ChatGPT，他并不总是能理解你的上下文。
-
-## 其它：Macbook Pro 的吐槽
-
-公司配置的 Macbook Pro 2019 虽然有 AMD 显卡，但是没有 CUDA、ROCm 的支持，所以只能用 CPU 来跑了。
-
-### AI 生态不友好
-
-诸如于 PyTorch，以前是支持 ROCm 加速的：
-
-![ROCm](https://pytorch.org/assets/images/amd_rocm_blog.png)
-
-现在的版本不行了：https://pytorch.org/get-started/locally/ 。
-
-## 本文相关资源
-
-AI 生成图片：
-
-- Stable Diffusion Webui GitHub： https://github.com/AUTOMATIC1111/stable-diffusion-webui
-- 通用的 AI 模型社区：https://huggingface.co/
-- Stable Diffusion AI 艺术模型社区：https://civitai.com/ （18 禁）
-
-代码模型相关：
-
-- Salesforce 模型：https://huggingface.co/Salesforce/codegen-6B-mono
-- CarpserAI： https://huggingface.co/CarperAI/diff-codegen-6b-v2
-
-ControlNet 加强：
-
-- 模型：https://huggingface.co/lllyasviel/ControlNet
-- 预编译：https://huggingface.co/kohya-ss/ControlNet-diff-modules
-
-
-
+ 
+In other scenarios, if your function names and parameter names are in English, the code generated by Copilot will be more accurate:
+ 
+![ GitHub sample 5 ](images/github-sample-5.png)
+ 
+In the unit test scenario, Copilot is more powerful and intelligent, and it can generate more test codes based on your test codes.
+ 
+###  Other: code generation open source model
+ 
+I also tried Salesforce
+The code model: [ https://huggingface.co/Salesforce/codegen-6B-mono](https://huggingface.co/Salesforce/codegen-6B-mono ), but can not run on my MBP, some Pity.
+ 
+##  Summary: AI is like divination
+ 
+You may not be able to predict what the output will be, and there will always be various surprises.
+ 
+In fact, similar to AI's prompt: when chatting with humans, we also need to provide enough context. So, you need to take a look at ChatGPT, which doesn't always understand your context.
+ 
+##  Others: Tucao of Macbook Pro
+ 
+Although the Macbook Pro 2019 configured by the company has an AMD graphics card, it does not have the support of CUDA and ROCm, so it can only run with the CPU.
+ 
+###  AI ecology is not friendly
+ 
+Such as PyTorch, previously supported ROCm acceleration:
+ 
+![ ROCm ](https://pytorch.org/assets/images/amd_rocm_blog.png)
+ 
+The current version is no longer available: https://pytorch.org/get-started/locally/.
+ 
+##  Related resources for this article
+ 
+AI generated pictures:
+ 
+- Stable Diffusion Webui GitHub: https://github.com/AUTOMATIC1111/stable-diffusion-webui
+-General AI model community: https://huggingface.co/
+- Stable Diffusion AI art model community: https://civitai.com/ (18 banned)
+ 
+Code model related:
+ 
+- Salesforce model: https://huggingface.co/Salesforce/codegen-6B-mono
+- CarpserAI: https://huggingface.co/CarperAI/diff-codegen-6b-v2
+ 
+ControlNet Enhancements:
+ 
+- Model: https://huggingface.co/lllyasviel/ControlNet
+- Precompiled: https://huggingface.co/kohya-ss/ControlNet-diff-modules
